@@ -116,8 +116,7 @@ def invalid_url(error):
             
         ),
         500,
-    )
-
+    ) 
 
 if __name__ == "__main__":
 
