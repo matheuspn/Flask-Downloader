@@ -2,7 +2,6 @@
 import os
 import shutil
 import time
-import schedule
 
 def remove_folder(path):
 
@@ -115,15 +114,6 @@ def clean():
 
 		# file/folder is not found
 		print(f'"{path}" is not found')
-		deleted_files_count += 1 # incrementing count
 
 	print(f"Total folders deleted: {deleted_folders_count}")
 	print(f"Total files deleted: {deleted_files_count}")
-
-def call_clean():
-
-	schedule.every(30).seconds.do(clean)
-
-	while True:
-		schedule.run_pending()
-		time.sleep(1)
