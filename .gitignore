@@ -94,3 +94,6 @@ dmypy.json
 
 # site stuff
 media/
+
+#Redis
+Redis/

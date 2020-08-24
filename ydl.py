@@ -16,7 +16,7 @@ from fetcher import id_generator
 def fetch_name(url):
     """ To get the title of the video """
     output = subprocess.getoutput(
-        'youtube-dl -e "{url}"'.format(url= url),
+        'youtube-dl --get-filename -o "%(title)s" "{url}" '.format(url= url),
         )
     return output
 
@@ -38,7 +38,7 @@ def get_media(url, choice):
             if choice == 1:
 
                 subprocess.call(
-                    'youtube-dl -f 251 -o "media/Audio downloads/{id_generated}.%(ext)s" -q --no-playlist --extract-audio --audio-format mp3 --no-warnings "{url}"'.format(
+                    'youtube-dl -f mp3/bestaudio -o "media/Audio downloads/{id_generated}.%(ext)s" -q --no-playlist --extract-audio --audio-format mp3 --no-warnings "{url}"'.format(
                         id_generated=id_generated, url=url
                     ),
                     shell=True,
@@ -48,7 +48,7 @@ def get_media(url, choice):
             elif choice == 2:
 
                 subprocess.call(
-                    'youtube-dl -f 22 -o "media/Video downloads/{id_generated}.%(ext)s" -q --no-playlist --no-warnings "{url}"'.format(
+                    'youtube-dl -o "media/Video downloads/{id_generated}.%(ext)s" -q --no-playlist --no-warnings -f mp4/bestvideo "{url}"'.format(
                         id_generated=id_generated, url=url
                     ),
                     shell=True,
@@ -68,7 +68,7 @@ def get_media(url, choice):
             elif choice == 4:
                 
                 subprocess.call(
-                    'youtube-dl -i -o "media/{id_generated}/%(playlist_index)s.%(title)s.%(ext)s" --yes-playlist --newline --no-warnings "{url}"'.format(
+                    'youtube-dl -i -o "media/{id_generated}/%(playlist_index)s.%(title)s.%(ext)s" --yes-playlist --newline --no-warnings -f mp4 "{url}"'.format(
                         id_generated=id_generated, url=url
                     ),
                     shell=True,

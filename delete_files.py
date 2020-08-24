@@ -2,6 +2,7 @@
 import os
 import shutil
 import time
+import schedule
 
 def remove_folder(path):
 
@@ -46,10 +47,10 @@ def clean():
 	deleted_files_count = 0
 
 	# specify the path
-	path = "C:\\Users\\matpr\\Desktop\\Flask-YouTube-master\\media"
+	path = "C:\\Users\\matpr\\Desktop\\Flask-downloader\\media"
 
 	# specify the seconds
-	seconds = 10800
+	seconds = 50
 
 	# converting seconds to seconds
 	# time.time() returns current time in seconds
@@ -117,3 +118,14 @@ def clean():
 
 	print(f"Total folders deleted: {deleted_folders_count}")
 	print(f"Total files deleted: {deleted_files_count}")
+
+
+schedule.every(1).minutes.do(clean)
+
+while True:
+	try:
+		schedule.run_pending()
+	except Exception as e:
+		print(e)
+
+	time.sleep(1)
