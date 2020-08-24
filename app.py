@@ -12,8 +12,9 @@ from flask import (
 from ydl import get_media, fetch_name
 from zipper import zipping
 
+# Flask config
 app = Flask(__name__)
-app.secret_key = "supposed to be a secret"
+app.config['SECRET_KEY'] = 'supose to be secret'
 
 
 @app.route("/return-file/")
@@ -35,7 +36,7 @@ def return_file():
         location = "media/{}.zip".format(session.get("id"))
 
     return send_file(
-        location, attachment_filename=filename_formatted, as_attachment=True
+        location, attachment_filename=filename_formatted, as_attachment= True,
     )
 
 
@@ -120,4 +121,4 @@ def invalid_url(error):
 
 if __name__ == "__main__":
 
-    app.run()
+    app.run(debug= True, host= '0.0.0.0', port= 5000)
